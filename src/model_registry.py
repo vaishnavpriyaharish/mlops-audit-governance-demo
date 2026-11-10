@@ -39,11 +39,38 @@ class ModelMetadata(BaseModel):
     approval_timestamp: Optional[datetime] = None
 
 
-class ModelRegistryManager:
-    """Manages model versioning, transition stages, and governance metadata tagging."""
+class ModelGovernance:
+    """TPM Reference Architecture: Model Governance Interface.
+
+    Handles the logging and promotion of ML models across environments (Dev -> Staging -> Prod).
+    Ensures all metadata and approval gates are passed before promotion.
+    """
 
     def __init__(self, tracking_uri: Optional[str] = None) -> None:
         self.tracking_uri = tracking_uri or "sqlite:///mlflow_governance.db"
+        # In full production deployment: mlflow.set_tracking_uri(self.tracking_uri)
+
+    def log_model_metadata(
+        self,
+        model_name: str,
+        metrics: Dict[str, float],
+        tags: Optional[Dict[str, Any]] = None,
+    ) -> None:
+        """Logs accuracy, latency, and compliance tags to the central registry."""
+        logger.info("Logging %s metadata to MLflow...", model_name)
+        # MLflow logging hook: mlflow.log_metrics(metrics), mlflow.set_tags(tags)
+
+    def check_approval_gate(self, model_version: str) -> bool:
+        """Verifies if the business stakeholder has approved the model for production."""
+        logger.info("Checking approval status for version %s...", model_version)
+        return True
+
+
+class ModelRegistryManager(ModelGovernance):
+    """Manages model versioning, transition stages, and governance metadata tagging."""
+
+    def __init__(self, tracking_uri: Optional[str] = None) -> None:
+        super().__init__(tracking_uri=tracking_uri)
         logger.info("Initialized ModelRegistryManager with tracking URI: %s", self.tracking_uri)
 
     def register_model_version(

@@ -11,6 +11,12 @@ As AI and Machine Learning models increasingly drive core business decisions, ma
 *   **Automated CI/CD:** Demonstrating continuous integration and continuous deployment workflows for ML assets.
 *   **Gatekeeping Approvals:** Structuring environments (Dev -> Staging -> Prod) with mandatory approval gates before model promotion.
 
+## 🧭 Strategic TPM Narrative
+
+* **The Problem:** Data scientists build high-impact models in isolated notebooks, but businesses cannot deploy untracked, un-auditable AI into production environments.
+* **The Solution:** A standardized reference architecture enforcing version control, stakeholder sign-offs, and automated deployment pipelines—keeping the business compliant while keeping engineering fast.
+* **Architectural Empathy:** Tangible proof of how "Shift-Left quality practices" and "MLOps CI/CD" function at the file-system and pipeline level, bridging data science, compliance, and cloud infrastructure.
+
 ## 📁 Repository Structure
 ```text
 ├── .github/workflows/       # CI/CD pipeline definitions
