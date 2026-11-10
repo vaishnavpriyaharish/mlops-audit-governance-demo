@@ -9,8 +9,13 @@ from __future__ import annotations
 
 import argparse
 import logging
+import sys
 import uuid
+from pathlib import Path
 from typing import Any, Dict
+
+# Ensure project root is available in module search path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src.audit_logger import AuditEvent, MLOpsAuditLogger
 from src.model_registry import ModelRegistryManager, ModelStage
